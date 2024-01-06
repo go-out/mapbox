@@ -253,7 +253,7 @@ const mikunigaoka = {
                 'title': 'フォーユー',
                 'address': '〒591-8046 大阪府堺市北区東三国ヶ丘町５丁８−７',
                 'date': '',
-                'iconSize': ['../profile/img/1010.png', '2rem', '2rem'],
+                'iconSize': ['https://upload.wikimedia.org/wikipedia/commons/5/5d/Hot_springs_001.svg', '2rem', '2rem'],
                 'tags': '',
                 'zoom': 15,
             }
