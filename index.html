@@ -8,31 +8,67 @@
 
   <!--og:meta-->
   <meta content="website" property="og:type">
-  <title></title>
-  <meta content="" property="og:title">
-  <meta content="" name="description">
-  <meta content="" name="og:description">
+  <title>Go Out | Mapbox GL JS</title>
+  <meta content="Go Out | Mapbox GL JS" property="og:title">
+  <meta content="Mapboxを用いて、カスタムデザイン地図をウェブページに表示する" name="description">
+  <meta content="Mapboxを用いて、カスタムデザイン地図をウェブページに表示する" name="og:description">
+
+  <link rel="icon" href="../profile/img/favicon.png">
+  <link rel="icon" href="../profile/img/mobile.png" sizes="192x192">
+  <link rel="apple-touch-icon-precomposed" href="../profile/img/mobile.png" sizes="180x180">
+
+  <!--for Twitter-->
+  <meta content="summary_large_image" name="twitter:card">
+  <meta content="https://creative-community.space/map/mapbox/" property="og:url">
+  <meta content="https://creative-community.space/map/profile/img/card.png" property="og:image">
+  <meta content="https://creative-community.space/map/profile/img/card.png" name="twitter:image:src">
+
   <link rel="stylesheet" href="index.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
 
   <!-- Mapbox -->
   <script src='https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.js'></script>
   <link href='https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.css' rel='stylesheet' />
-
-  <script src="marker/index.js"></script>
-  <script src="marker/mikunigaoka.js"></script>
 </head>
 
 <body>
   <div id="map"></div>
 
+  <nav>
+    <fieldset id="styles">
+      <legend>Mapbox Styles API</legend>
+      <code>スタイルURL</code>
+      <br>
+    </fieldset>
+    <script src="styles/script.js"></script>
+
+    <fieldset>
+      <legend>Geocoding API</legend>
+      <code id="address">クリックした場所の位置情報を取得し、ポップアップに表示</code>
+    </fieldset>
+  </nav>
+
   <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoicGVodSIsImEiOiJja3R4Y3diNmIybTg5Mm9waWgwYTdsc3FyIn0.lVvnPZ3aa6332EaWJIxPaQ';
 
     let css = 'mapbox://styles/mapbox/standard',
+      lng,
+      lat,
       center,
       zoom;
-    
-    center = [135.49242578110955, 34.56564176625852]
+
+    function getRandomInt(min, max) {
+      min = Math.ceil(min)
+      max = Math.floor(max)
+      return Math.floor(Math.random() * (max - min) + min)
+    }
+
+    lng = getRandomInt(-180, 180)
+    lat = getRandomInt(-90, 90)
+    center = [lng, lat]
 
     const map = new mapboxgl.Map({
       container: 'map',
@@ -40,10 +76,22 @@
       style: css,
       pitch: 0,
       bearing: 0,
-      zoom: 13.5,
+      zoom: 0,
       scrollZoom: 1,
       projection: 'globe',
       attributionControl: false
+    })
+    const popup = new mapboxgl.Popup()
+      .setLngLat(center)
+      .setHTML(`<p>${center}</p>`)
+      .addTo(map);
+
+    map.on("click", (e) => {
+      let thisLngLat = [e.lngLat.lng, e.lngLat.lat]
+      const popup = new mapboxgl.Popup()
+        .setLngLat(thisLngLat)
+        .setHTML(`<p>${thisLngLat}</p>`)
+        .addTo(map);
     })
 
     map.addControl(
