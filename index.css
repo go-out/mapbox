@@ -19,19 +19,13 @@ nav {
     max-height: -webkit-fill-available;
 }
 
-@font-face {
-    font-family: "Kristina";
-    src: url("../profile/fonts/Kristina-Bold.otf") format("opentype"),
-        url("../profile/fonts/Kristina-Fine.otf") format("opentype");
-}
-
 body {
     background-color: lemonchiffon;
 }
 
 nav,
 .mapboxgl-popup-content p {
-    font-family: "Kristina", 'Zen Maru Gothic', cursive;
+    font-family: 'Zen Maru Gothic', cursive;
 }
 
 code {
