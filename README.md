@@ -197,4 +197,4 @@ map.on("mousedown", () => { userInteracting = !0 }),
 ***
 
 [建物を3Dで表示](https://docs.mapbox.com/jp/mapbox-gl-js/example/3d-buildings/)
-[3d.js](js/3d.js)
+[3d.js](3d.js)
